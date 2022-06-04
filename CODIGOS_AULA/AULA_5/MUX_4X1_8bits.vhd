@@ -1,0 +1,26 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY MUX IS
+    PORT(
+        i_A   :  in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        i_B   :  in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        i_C   :  in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        i_D   :  in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        o_C   :  out STD_LOGIC_VECTOR(7 DOWNTO 0);
+        i_SEL :  in  STD_LOGIC_VECTOR(2 DOWNTO 0)
+    );
+END MUX;
+
+ARCHITECTURE BEHAVIORAL OF MUX IS
+
+BEGIN
+
+    o_C <= i_A WHEN i_SEL = "00" ELSE
+           i_B WHEN i_SEL = "01" ELSE
+           i_C WHEN i_SEL = "10" ELSE
+           i_D WHEN i_SEL = "11";
+
+END BEHAVIORAL;
