@@ -1,0 +1,33 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY RegSyncLoad IS
+	PORT (
+		i_RST   :  IN   STD_LOGIC;
+		i_CLK   :  IN   STD_LOGIC;
+		i_LOAD  :  IN   STD_LOGIC;
+		i_DATA  :  IN   STD_LOGIC_VECTOR(15 DOWNTO 0);
+		o_DATA  :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0)
+	);
+END RegSyncLoad;
+
+ARCHITECTURE BEHAVIORAL OF RegSyncLoad IS
+
+BEGIN
+
+	PROCESS(i_CLK, i_RST)
+	BEGIN
+		IF RISING_EDGE(i_CLK) THEN
+			IF (i_RST = '1') THEN
+				o_DATA <= (OTHERS => '0'); --Coloca o valor 0 para todos os bits de o_DATA, independente de quantos forem
+			ELSIF (i_LOAD = '1') THEN
+				o_DATA <= X"AA55";
+			ELSE
+				o_DATA <= i_DATA;
+			END IF;
+		END IF;
+	END PROCESS;
+
+END BEHAVIORAL;
