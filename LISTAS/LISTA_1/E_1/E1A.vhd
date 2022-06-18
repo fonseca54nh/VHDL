@@ -5,12 +5,12 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 
 ENTITY E1A IS
     PORT(
-		  i_A    :    IN    STD_LOGIC;
-	    i_B    :    IN    STD_LOGIC;
-  	  i_C    :    IN    STD_LOGIC;
-	    i_D    :    IN    STD_LOGIC;
-	    o_S    :    OUT   STD_LOGIC
-	  );
+         i_A    :    IN    STD_LOGIC;
+	 i_B    :    IN    STD_LOGIC;
+  	 i_C    :    IN    STD_LOGIC;
+	 i_D    :    IN    STD_LOGIC;
+	 o_S    :    OUT   STD_LOGIC
+    );
 END E1A;
 
 ARCHITECTURE BEHAVIORAL OF E1A IS
