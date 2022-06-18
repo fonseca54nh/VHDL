@@ -1,0 +1,79 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_SIGNED.ALL;
+
+ENTITY TB_CRONOMETRO IS
+END TB_CRONOMETRO;
+
+ARCHITECTURE BEHAVIORAL OF TB_CRONOMETRO IS
+
+   COMPONENT CRONOMETRO IS
+	   PORT(
+		   i_CLK        :   IN STD_LOGIC;
+   		i_RST        :   IN STD_LOGIC;
+	   	i_START      :   IN STD_LOGIC;
+		   i_STOP       :   IN STD_LOGIC;
+		   i_CLEAR      :   IN STD_LOGIC;
+		   o_CONTADOR   :   OUT STD_LOGIC_VECTOR(27 DOWNTO 0);
+		   o_LED        :   OUT STD_LOGIC
+	   );
+   END COMPONENT;
+
+	SIGNAL w_CLK       :   STD_LOGIC;
+   SIGNAL w_RST       :   STD_LOGIC;
+   SIGNAL w_START     :   STD_LOGIC;
+   SIGNAL w_STOP      :   STD_LOGIC;
+   SIGNAL w_CLEAR     :   STD_LOGIC;
+   SIGNAL w_CONTADOR  :   STD_LOGIC_VECTOR(27 DOWNTO 0);
+   SIGNAL w_LED       :   STD_LOGIC;	
+	
+BEGIN
+	
+	UUT: CRONOMETRO
+	PORT MAP(
+		   i_CLK        => w_CLK,
+   		i_RST        => w_RST,
+	   	i_START      => w_START,
+		   i_STOP       => w_STOP,
+		   i_CLEAR      => w_CLEAR,
+		   o_CONTADOR   => w_CONTADOR,
+		   o_LED        => w_LED
+	);
+	
+	---
+	--- PROCESSO DE RELÓGIO
+	---
+	PROCESS
+	BEGIN
+	   w_CLK <= '0';
+		WAIT FOR 10 NS;
+		w_CLK <= '1';
+		WAIT FOR 10 NS;
+	END PROCESS;
+	
+	---
+	--- CIRCUITO DE RESET
+	---
+	PROCESS
+	BEGIN
+		w_RST <= '1';
+		WAIT FOR 100 NS;
+	   w_RST <= '0';
+		WAIT;
+	END PROCESS;
+	
+	---
+	--- TESTE DO CRONÔMETRO
+	---
+	PROCESS
+	BEGIN
+		w_START <= '0';
+		w_START <= '0';
+		w_CLEAR <= '0';
+		WAIT FOR 150 NS;
+		w_START <= '1';
+		WAIT;
+	END PROCESS;
+	
+END BEHAVIORAL;
