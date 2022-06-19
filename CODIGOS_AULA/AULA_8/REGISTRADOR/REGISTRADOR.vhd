@@ -5,7 +5,7 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 ENTITY REGISTRADOR IS
    GENERIC(
-      N       :   INTEGER  :=  16
+      N       :   INTEGER  :=  8
    );
    PORT(
       i_RST   :   IN   STD_LOGIC;
