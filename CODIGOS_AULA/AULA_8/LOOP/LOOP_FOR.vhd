@@ -8,7 +8,7 @@ ENTITY LOOP_FOR IS
       N   :     INTEGER   :=   3                        -- Numero de bits
    );
    PORT(
-      X,Y : IN  STD_LOGIC_VECTOR(N-1 DOWNTO 0);         -- Entradas do somados
+      X,Y : IN  STD_LOGIC_VECTOR(N-1 DOWNTO 0);         -- Entradas do somador
       ZE  : IN  STD_LOGIC;                              -- Vem um
       S   : OUT STD_LOGIC_VECTOR(N-1 DOWNTO 0);         -- Saida
       ZS  : OUT STD_LOGIC                               -- Vai um
