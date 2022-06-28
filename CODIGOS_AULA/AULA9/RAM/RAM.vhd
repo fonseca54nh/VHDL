@@ -5,17 +5,18 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 ENTITY RAM IS
    GENERIC(
-      p_MEMORY_TYPE   :    STRING  := "INTEL";   -- Possible values: "INTEL"|"OWN"
-      p_DATA_WIDTH    :    INTEGER := 8;         -- Bus width: 8 bits
-      p_ADD_WIDTH     :    INTEGER := 6          -- number of positions: (2^6) = 64
+      p_MEMORY_TYPE     :    STRING  := "INTEL";   -- Possible values: "INTEL"|"OWN"
+      p_MEMORY_RESOURCE :    STRING  := "LOGIC";   -- Possible values: "LOGIC"|"M9K"
+      p_DATA_WIDTH      :    INTEGER := 8;         -- Bus width: 8 bits
+      p_ADD_WIDTH       :    INTEGER := 6          -- number of positions: (2^6) = 64
    );
    PORT(
-      i_CLK           :    IN  STD_LOGIC;
-      i_DATA          :    IN  STD_LOGIC_VECTOR(p_DATA_WIDTH-1 DOWNTO 0);
-      i_ADD           :    IN  STD_LOGIC_VECTOR(p_ADD_WIDTH-1 DOWNTO 0);
-      i_WE            :    IN  STD_LOGIC;
-      i_EN            :    IN  STD_LOGIC;
-      o_DATA          :    OUT STD_LOGIC_VECTOR(p_DATA_WIDTH-1 DOWNTO 0)	
+      i_CLK             :    IN  STD_LOGIC;
+      i_DATA            :    IN  STD_LOGIC_VECTOR(p_DATA_WIDTH-1 DOWNTO 0);
+      i_ADD             :    IN  STD_LOGIC_VECTOR(p_ADD_WIDTH-1 DOWNTO 0);
+      i_WE              :    IN  STD_LOGIC;
+      i_EN              :    IN  STD_LOGIC;
+      o_DATA            :    OUT STD_LOGIC_VECTOR(p_DATA_WIDTH-1 DOWNTO 0)	
    );
 END RAM;
 
@@ -23,6 +24,9 @@ ARCHITECTURE BEHAVIORAL OF RAM IS
 
    TYPE MEM_TYPE IS ARRAY (i_ADD'RANGE) OF STD_LOGIC_VECTOR(i_DATA'RANGE);
    SIGNAL w_MEMORY : MEM_TYPE;
+
+   ATTRIBUTE RAMSTYLE : STRING;
+   ATTRIBUTE RAMSTYLE OF w_MEMORY : SIGNAL IS p_MEMORY_RESOURCE;
 
    COMPONENT INTEL_MEMORY
    PORT
